@@ -33,14 +33,14 @@
 
 ```bash
 # 直接安装技能
-claude skill install https://github.com/YOUR_USERNAME/nuitka-pack
+claude skill install https://github.com/zhouyp001/nuitka-pack-skill
 ```
 
 ### 手动安装
 
 ```bash
 # 克隆到 Claude Code 的 skills 目录
-git clone https://github.com/YOUR_USERNAME/nuitka-pack.git ~/.claude/skills/nuitka-pack
+git clone https://github.com/zhouyp001/nuitka-pack-skill.git ~/.claude/skills/nuitka-pack
 ```
 
 ## 使用方式
@@ -133,7 +133,7 @@ python scripts/monitor_cpu.py --threshold 50 --interval 60
 ## 目录结构
 
 ```
-nuitka-pack/
+nuitka-pack-skill/
 ├── SKILL.md              # 技能定义文件（Claude Code 加载）
 ├── scripts/
 │   └── monitor_cpu.py    # CPU/内存监控脚本，编译完成后蜂鸣提醒

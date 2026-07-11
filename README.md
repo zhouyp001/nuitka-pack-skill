@@ -33,14 +33,14 @@ When you invoke this skill, Claude Code will:
 
 ```bash
 # Install the skill directly
-claude skill install https://github.com/YOUR_USERNAME/nuitka-pack
+claude skill install https://github.com/zhouyp001/nuitka-pack-skill
 ```
 
 ### Manual installation
 
 ```bash
 # Clone into your Claude Code skills directory
-git clone https://github.com/YOUR_USERNAME/nuitka-pack.git ~/.claude/skills/nuitka-pack
+git clone https://github.com/zhouyp001/nuitka-pack-skill.git ~/.claude/skills/nuitka-pack
 ```
 
 ## Usage
@@ -133,7 +133,7 @@ python scripts/monitor_cpu.py --threshold 50 --interval 60
 ## File structure
 
 ```
-nuitka-pack/
+nuitka-pack-skill/
 ├── SKILL.md              # Skill definition loaded by Claude Code
 ├── scripts/
 │   └── monitor_cpu.py    # CPU/memory monitor with beep alert on completion
