@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-v1.0-green.svg)](https://github.com/zhouyp001/nuitka-pack-skill/releases/tag/v1.0)
+[![CI](https://github.com/zhouyp001/nuitka-pack-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/zhouyp001/nuitka-pack-skill/actions/workflows/ci.yml)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey.svg)]()
 
 > A Claude Code skill for packaging PySide6/PyQt applications into standalone Windows executables with Nuitka.
