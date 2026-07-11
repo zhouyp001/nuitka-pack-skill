@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-skill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          pip install pyyaml -q
+          python3 << 'EOF'
+          import sys
+
+          with open("SKILL.md", encoding="utf-8") as f:
+              content = f.read()
+
+          # Must start with YAML frontmatter delimited by ---
+          if not content.startswith("---"):
+              print("ERROR: SKILL.md must start with YAML frontmatter (---)")
+              sys.exit(1)
+
+          parts = content.split("---", 2)
+          if len(parts) < 3:
+              print("ERROR: SKILL.md has malformed frontmatter")
+              sys.exit(1)
+
+          import yaml
+          try:
+              meta = yaml.safe_load(parts[1])
+          except yaml.YAMLError as e:
+              print(f"ERROR: invalid YAML in frontmatter: {e}")
+              sys.exit(1)
+
+          # Required fields for a Claude Code skill
+          required = ["name", "description"]
+          for key in required:
+              if key not in meta:
+                  print(f"ERROR: missing required field '{key}' in frontmatter")
+                  sys.exit(1)
+
+          print(f"OK: skill name='{meta['name']}', description='{meta['description']}'")
+          EOF
+
+  check-scripts:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install psutil
+
+      - name: Syntax check
+        run: python -m py_compile scripts/monitor_cpu.py
+
+      - name: Import check
+        run: python -c "import sys; sys.path.insert(0, 'scripts'); __import__('monitor_cpu')"
+
+      - name: CLI smoke test
+        run: python scripts/monitor_cpu.py --help
